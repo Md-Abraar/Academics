@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Inactive students{% endblock title %}
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card card-info">
+                <div class="card-header">
+                    <div class="p-3">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="roll_no" class="form-label small">Roll No.:</label>
+                                    <input type="text" class="form-control" id="roll_no" name="roll_no" placeholder="Roll Number">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inactive_type" class="form-label small">Inacive Type:</label>
+                                    <input type="text" class="form-control" id="inactive_type" name="inactive_type" placeholder="Type (dropout/passed_out)">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="year" class="form-label small">Year:</label>
+                                    <input type="number" class="form-control" id="year" name="year" placeholder="Year">
+                                </div>
+                                
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="drop_reason" class="form-label small">Dropout Reason:</label>
+                                    <input type="text" class="form-control" id="drop_reason" name="drop_reason" placeholder="Drop out Reason">
+                                </div>
+                                
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="gap_reason" class="form-label small">Gap reason:</label>
+                                    <input type="text" class="form-control" id="gap_reason" name="gap_reason" placeholder="gap_reason">
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
