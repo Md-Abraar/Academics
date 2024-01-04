@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Inactive students{% endblock title %}
+{% block title %}Comprehensive{% endblock title %}
 {% block body %}
 <div class="container">
     <div class="row justify-content-center">
@@ -9,42 +9,63 @@
                     <div class="p-3">
                         <form>
                             <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="rollno" class="form-label small">Roll No.:</label>
+                                    <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Roll No.of student">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="scheme" class="form-label small">Scheme.:</label>
+                                    <input type="text" class="form-control" id="scheme" name="scheme" placeholder="Scheme">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="semester" class="form-label small">Semester:</label>
+                                    <input type="text" class="form-control" id="semester" name="semester" placeholder="Semester">
+                                </div>
+                                
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="roll_no" class="form-label small">Roll No.:</label>
-                                    <input type="text" class="form-control" id="roll_no" name="roll_no" placeholder="Roll Number">
+                                    <label for="branch" class="form-label small">Branch:</label>
+                                    <input type="text" class="form-control" id="branch" name="branch" placeholder="Branch">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="inactive_type" class="form-label small">Inacive Type:</label>
-                                    <input type="text" class="form-control" id="inactive_type" name="inactive_type" placeholder="Type (dropout/passed_out)">
+                                    <label for="section" class="form-label small">Section.:</label>
+                                    <input type="section" class="form-control" id="section" name="section" placeholder="Section">
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="gpa" class="form-label small">GPA of student</label>
+                                    <input type="number" class="form-control" id="gpa" name="gpa" placeholder="GPA of student">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="cgpa" class="form-label small">CGPA of student.:</label>
+                                    <input type="number" class="form-control" id="cgpa" name="cgpa" placeholder="CGPA of student">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="total_credits" class="form-label small">Overall Credits:</label>
+                                    <input type="number" class="form-control" id="total_credits" name="total_credits" placeholder="Overall Credits">
+                                </div>                                
+                            </div>
+                            
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">is_active</label>
+                            </div>
+                            
 
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <label for="year" class="form-label small">Year:</label>
-                                    <input type="number" class="form-control" id="year" name="year" placeholder="Year">
-                                </div>
-                                
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <label for="drop_reason" class="form-label small">Dropout Reason:</label>
-                                    <input type="text" class="form-control" id="drop_reason" name="drop_reason" placeholder="Drop out Reason">
-                                </div>
-                                
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <label for="gap_reason" class="form-label small">Gap reason:</label>
-                                    <input type="text" class="form-control" id="gap_reason" name="gap_reason" placeholder="gap_reason">
-                                </div>
-                                
-                            </div>
+
+
+
+                            
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 {% endblock body %}
