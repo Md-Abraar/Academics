@@ -8,6 +8,6 @@ admin.site.register(Comprehensive)
 admin.site.register(Student_Subject_Mapping)
 admin.site.register(Electives)
 admin.site.register(Detention)
-admin.site.register(Marks)
+admin.site.register(Faculty_Mapping)
 admin.site.register(Inactive)
 

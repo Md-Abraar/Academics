@@ -17,6 +17,13 @@ class Branch(models.Model):
     branch=models.CharField(max_length=60)
     course_code=models.CharField(max_length=10)
 
+class Faculty_Mapping(models.Model):
+    faculty_id=models.CharField(max_length=10)
+    branch=models.CharField(max_length=60)
+    semester=models.IntegerField()
+    section=models.CharField(max_length=1)
+    course_code=models.CharField(max_length=10)
+
 class Comprehensive(models.Model):
     roll_no=models.CharField(max_length=10)
     branch=models.CharField(max_length=60)
@@ -45,15 +52,15 @@ class Detention(models.Model):
     reason=models.TextField()
     doc_proof = models.FileField(upload_to='documents/')
 
-class Marks(models.Model):
-    roll_no=models.CharField(max_length=10)
-    semester=models.IntegerField()
-    subject=models.CharField(max_length=50)
-    internal_marks=models.IntegerField()
-    external_marks=models.IntegerField()
-    total_marks=models.IntegerField()
-    has_backlog= models.BooleanField(default=True)
-    credits=models.DecimalField(max_digits=6, decimal_places=1)
+# class Marks(models.Model):
+#     roll_no=models.CharField(max_length=10)
+#     semester=models.IntegerField()
+#     subject=models.CharField(max_length=50)
+#     internal_marks=models.IntegerField()
+#     external_marks=models.IntegerField()
+#     total_marks=models.IntegerField()
+#     has_backlog= models.BooleanField(default=True)
+#     credits=models.DecimalField(max_digits=6, decimal_places=1)
 
 class Inactive(models.Model):
     roll_no=models.CharField(max_length=10)
