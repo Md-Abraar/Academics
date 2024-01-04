@@ -2,5 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("",views.index, name="index"),
+    path("",views.student, name="student"),
+    path("inactive",views.inactive, name="inactive"),
+    path("detention",views.detention, name="detention"),
+    path("student_mapping",views.student_mapping, name="student_mapping"),
+    path("faculty_mapping",views.faculty_mapping, name="faculty_mapping"),
+    path("electives",views.electives, name="electives"),
+    path("subject",views.subject, name="subject")
 ]

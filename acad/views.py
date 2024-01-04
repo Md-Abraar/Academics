@@ -3,7 +3,7 @@ from acad.models import *
 
 # Create your views here.
 def student(request):
-    return render(request, "base.html")
+    return render(request, "comprehensive.html")
 
 def inactive(request):
     return render(request, "inactive.html")
@@ -14,7 +14,7 @@ def detention(request):
 def student_mapping(request):
     return render(request, "student_mapping.html")
 
-def staffing(request):
+def faculty_mapping(request):
     return render(request, "faculty_mapping.html")
 
 def electives(request):
