@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Student marks{% endblock title %}
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card card-info">
+                <div class="card-header">
+                    <div class="p-3">
+                        <form>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="branch" class="form-label small">Branch:</label>
+                                    <input type="text" class="form-control" id="branch" name="branch" placeholder="Name of Branch">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="semester" class="form-label small">Semester:</label>
+                                    <input type="number" class="form-control" id="semester" name="semester" placeholder="Semester">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="section" class="form-label small">section:</label>
+                                    <input type="number" class="form-control" id="section" name="section" placeholder="Section">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="faculty_id" class="form-label small">Faculty Id.:</label>
+                                    <input type="text" class="form-control" id="faculty_id" name="faculty_id" placeholder="Faculty Id">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="course_code" class="form-label small">Course code:</label>
+                                    <input type="text" class="form-control" id="course_code" name="course_code" placeholder="Course code">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
