@@ -3,4 +3,4 @@ from acad.models import *
 
 # Create your views here.
 def index(request):
-    return render(request, "inactive.html")
+    return render(request, "base.html")
