@@ -9,5 +9,7 @@ urlpatterns = [
     path("faculty_mapping",views.faculty_mapping, name="faculty_mapping"),
     path("electives",views.electives, name="electives"),
     path("subject",views.subject, name="subject"),
-    path("marks", views.marks, name="marks")
+    path("marks", views.marks, name="marks"),
+    path('show', views.show, name='show')
+
 ]

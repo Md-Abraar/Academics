@@ -10,4 +10,5 @@ admin.site.register(Electives)
 admin.site.register(Detention)
 admin.site.register(Faculty_Mapping)
 admin.site.register(Inactive)
+admin.site.register(Marks)
 

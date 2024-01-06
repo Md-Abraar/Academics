@@ -52,15 +52,15 @@ class Detention(models.Model):
     reason=models.TextField()
     doc_proof = models.FileField(upload_to='documents/')
 
-# class Marks(models.Model):
-#     roll_no=models.CharField(max_length=10)
-#     semester=models.IntegerField()
-#     subject=models.CharField(max_length=50)
-#     internal_marks=models.IntegerField()
-#     external_marks=models.IntegerField()
-#     total_marks=models.IntegerField()
-#     has_backlog= models.BooleanField(default=True)
-#     credits=models.DecimalField(max_digits=6, decimal_places=1)
+class Marks(models.Model):
+    roll_no=models.CharField(max_length=10)
+    semester=models.IntegerField()
+    subject=models.CharField(max_length=50)
+    cia_marks=models.IntegerField()
+    end_exam_marks=models.IntegerField()
+    total_marks=models.IntegerField()
+    has_backlog= models.BooleanField(default=True)
+    credits=models.DecimalField(max_digits=6, decimal_places=1)
 
 class Inactive(models.Model):
     roll_no=models.CharField(max_length=10)
