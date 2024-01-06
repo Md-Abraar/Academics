@@ -22,3 +22,6 @@ def electives(request):
 
 def subject(request):
     return render(request, "subj.html")
+
+def marks(request):
+    return render(request, "marks.html")
