@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator, EmptyPage
 from acad.models import *
 
 # Create your views here.
@@ -43,9 +46,51 @@ def subject(request):
     
     return render(request, "subj.html")
 
-def show(request):
-    return render(request, 'show.html')
-
 
 def marks(request):
     return render(request, "marks.html")
+
+def show(request):
+    # Create dummy records
+    # for i in range(1, 51):
+    #     YourModel.objects.create(name=f"Record {i}", description=f"Description {i}")
+
+    # Retrieve and paginate records
+    records = YourModel.objects.all()
+    page = request.GET.get('page', 1)
+    records_per_page = 10
+    paginator = Paginator(records, records_per_page)
+    try:
+        records = paginator.page(page)
+    except EmptyPage:
+        records = paginator.page(paginator.num_pages)
+
+    return render(request, 'show.html', {'records': records})
+
+def add_record(request):
+    # Handle form submission for adding a new record
+    if request.method == 'POST':
+        # Process the form data and save the new record
+        # ...
+
+        return JsonResponse({'success': True})
+
+    return JsonResponse({'success': False})
+
+@require_POST
+def delete_record(request, record_id):
+    # Handle record deletion
+    record = get_object_or_404(YourModel, id=record_id)
+    record.delete()
+    return JsonResponse({'success': True})
+
+def edit_record(request, record_id):
+    record = get_object_or_404(YourModel, id=record_id)
+
+    if request.method == 'POST':
+        # Handle form submission for editing the record
+        # ...
+
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
+

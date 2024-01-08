@@ -68,6 +68,15 @@ class Inactive(models.Model):
     year=models.IntegerField()
     drop_reason=models.TextField(null=True)
     gap_reason=models.TextField(null=True)
+
+
+class YourModel(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
     
     
 

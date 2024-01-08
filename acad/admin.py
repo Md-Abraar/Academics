@@ -12,3 +12,7 @@ admin.site.register(Faculty_Mapping)
 admin.site.register(Inactive)
 admin.site.register(Marks)
 
+@admin.register(YourModel)
+class YourModelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+
