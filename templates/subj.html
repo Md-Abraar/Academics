@@ -7,7 +7,7 @@
             <div class="card card-info my-5">
                 <div class="card-header">
                     <div class="p-3">
-                        <form>
+                        <form method="POST" action=" {% url "subject" %} ">
                             {% csrf_token %}
                             <div class="row mb-3">
                                 <div class="col-md-4">

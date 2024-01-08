@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage
@@ -26,7 +26,7 @@ def electives(request):
 def subject(request):
     if request.method=='POST':
         course_code=request.POST.get('course_code')
-        subject=request.POST.get('course_code')
+        subject=request.POST.get('subject')
         category=request.POST.get('category')
         scheme=request.POST.get('scheme')
         semester=request.POST.get('semester')
@@ -36,13 +36,19 @@ def subject(request):
         cia_marks=request.POST.get('cia_marks')
         total_marks=request.POST.get('total_marks')
         
+       
+        mem=Subjects(course_code=course_code,subject=subject, category=category, scheme=scheme,
+                      semester=semester, type=type1,credits=credits, end_exam_marks=end_exam_marks,
+                    cia_marks=cia_marks, total_marks=total_marks)
+        mem.save()
+
+        # con = {'course_code':course_code,'subject':subject,'category':category,'scheme':scheme,
+        #      'semester':semester,'type':type1,'credits':credits,'end_exam_marks':end_exam_marks,
+        #      'cia_marks':cia_marks,'total_marks':total_marks}
         
-        con = {'course_code':course_code,'subject':subject,'category':category,'scheme':scheme,
-             'semester':semester,'type':type1,'credits':credits,'end_exam_marks':end_exam_marks,
-             'cia_marks':cia_marks,'total_marks':total_marks}
-        
-        # sub=Subjects.objects.all()
-        return render(request, 'show.html',con)
+        # records=Subjects.objects.all()
+        # return render(request, 'show.html',{records:records})
+        return redirect('show')
     
     return render(request, "subj.html")
 
@@ -56,7 +62,7 @@ def show(request):
     #     YourModel.objects.create(name=f"Record {i}", description=f"Description {i}")
 
     # Retrieve and paginate records
-    records = YourModel.objects.all()
+    records = Subjects.objects.all()
     page = request.GET.get('page', 1)
     records_per_page = 10
     paginator = Paginator(records, records_per_page)
@@ -69,28 +75,60 @@ def show(request):
 
 def add_record(request):
     # Handle form submission for adding a new record
-    if request.method == 'POST':
-        # Process the form data and save the new record
-        # ...
+    # if request.method == 'POST':
+    #     # Process the form data and save the new record
+    #     # ...
 
-        return JsonResponse({'success': True})
+    #     return JsonResponse({'success': True})
 
-    return JsonResponse({'success': False})
+    # return JsonResponse({'success': False})
+    return render(request, 'subj.html')
 
 @require_POST
 def delete_record(request, record_id):
     # Handle record deletion
-    record = get_object_or_404(YourModel, id=record_id)
+    record = get_object_or_404(Subjects, id=record_id)
     record.delete()
-    return JsonResponse({'success': True})
-
+    # return JsonResponse({'success': True})
+    return redirect("show")
+    
 def edit_record(request, record_id):
-    record = get_object_or_404(YourModel, id=record_id)
+    # record = get_object_or_404(Subjects, id=record_id)
+    course_code=request.POST.get('course_code')
+    subject=request.POST.get('subject')
+    category=request.POST.get('category')
+    scheme=request.POST.get('scheme')
+    semester=request.POST.get('semester')
+    type1=request.POST.get('type')
+    credits=request.POST.get('credits')
+    end_exam_marks=request.POST.get('end_exam_marks')
+    cia_marks=request.POST.get('cia_marks')
+    total_marks=request.POST.get('total_marks')
 
-    if request.method == 'POST':
-        # Handle form submission for editing the record
-        # ...
+    mem=Subjects.objects.get(id=record_id)
+    
+    mem.course_code=course_code
+    mem.subject=subject
+    mem.category=category
+    mem.scheme=scheme
+    mem.semester=semester
+    mem.type1=type1
+    mem.credits=credits
+    mem.end_exam_marks=end_exam_marks
+    mem.cia_marks=cia_marks
+    mem.total_marks=total_marks
+    mem.save()
+    return redirect("show")
 
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
+
+
+
+    # rec=Subjects.objects.get(id=record_id)
+    # return render(request, "show.html", {'record':rec})
+    # if request.method == 'POST':
+    #     # Handle form submission for editing the record
+    #     # ...
+
+    #     return JsonResponse({'success': True})
+    # return JsonResponse({'success': False})
 

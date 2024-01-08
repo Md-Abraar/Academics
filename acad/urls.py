@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+#app_name = 'acad'
 urlpatterns = [
     path("",views.student, name="student"),
     path("inactive",views.inactive, name="inactive"),
