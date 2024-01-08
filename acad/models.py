@@ -32,8 +32,12 @@ class Comprehensive(models.Model):
     scheme=models.CharField(max_length=10)
     cgpa=models.DecimalField(max_digits=5, decimal_places=2)
     total_credits=models.DecimalField(max_digits=10, decimal_places=2)
-    gpa=models.DecimalField(max_digits=5, decimal_places=2)
     is_active = models.BooleanField(default=True)
+
+class Gpa(models.Model):
+        roll_no=models.CharField(max_length=10)
+        semester=models.IntegerField()
+        gpa=models.DecimalField(max_digits=5, decimal_places=2)
 
 class Student_Subject_Mapping(models.Model):
     roll_no=models.CharField(max_length=10)
@@ -76,6 +80,7 @@ class YourModel(models.Model):
 
     def __str__(self):
         return self.name
+
 
     
     

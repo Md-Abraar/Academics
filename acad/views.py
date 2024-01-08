@@ -6,7 +6,10 @@ from acad.models import *
 
 # Create your views here.
 def student(request):
-    return render(request, "comprehensive.html")
+    context = {
+        'detained':False
+    }
+    return render(request, "comprehensive.html", context)
 
 def inactive(request):
     return render(request, "inactive.html")

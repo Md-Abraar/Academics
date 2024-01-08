@@ -4,62 +4,68 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card card-info my-5">
+            <div class="d-flex mt-5 mb-3"><button class="btn btn-success btn-sm" type="submit">Generate new rolls</button><div class="form-text ms-3 p-0">Click this for db update</div></div>
+            <div class="card card-info mb-5">
                 <div class="card-header">
+                    <nav class="navbar bg-light">
+                        <div class="container-fluid">
+                          <form class="d-flex">
+                            <input class="form-control me-2" type="search" id="rollno" name="rollno" placeholder="Enter roll no" aria-label="Fetch">
+                            <div class="p-1"><button class="btn btn-success btn-sm" type="submit">Fetch</button></div>
+                          </form>   
+                          <div class="p-1 float-end">
+                            {% if detained %}
+                                <p class="text-danger">Detained</p>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </nav>
+                      
+                </div>
+                <div class="card-body">
                     <div class="p-3">
                         <form>
                             <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="rollno" class="form-label small">Roll No.:</label>
-                                    <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Roll No.of student">
+                                <div class="col-md-6">
+                                    <label for="branch" class="form-label small">Branch:</label>
+                                    <input type="text" class="form-control" id="branch" name="branch" placeholder="Branch" readonly>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="scheme" class="form-label small">Scheme.:</label>
-                                    <input type="text" class="form-control" id="scheme" name="scheme" placeholder="Scheme">
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="semester" class="form-label small">Semester:</label>
-                                    <input type="text" class="form-control" id="semester" name="semester" placeholder="Semester">
+                                    <input type="number" class="form-control" id="semester" name="semester" placeholder="1" readonly>
                                 </div>
                                 
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="branch" class="form-label small">Branch:</label>
-                                    <input type="text" class="form-control" id="branch" name="branch" placeholder="Branch">
+                                    <label for="scheme" class="form-label small">Scheme:</label>
+                                    <input type="text" class="form-control" id="scheme" name="scheme" placeholder="Scheme">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="section" class="form-label small">Section.:</label>
+                                    <label for="section" class="form-label small">Section:</label>
                                     <input type="section" class="form-control" id="section" name="section" placeholder="Section">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <label for="gpa" class="form-label small">GPA of student</label>
-                                    <input type="number" class="form-control" id="gpa" name="gpa" placeholder="GPA of student">
-                                </div>
-                                <div class="col-md-4">
                                     <label for="cgpa" class="form-label small">CGPA of student.:</label>
-                                    <input type="number" class="form-control" id="cgpa" name="cgpa" placeholder="CGPA of student">
+                                    <input type="number" class="form-control" id="cgpa" name="cgpa" placeholder="0.0" readonly>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="total_credits" class="form-label small">Overall Credits:</label>
-                                    <input type="number" class="form-control" id="total_credits" name="total_credits" placeholder="Overall Credits">
+                                    <input type="number" class="form-control" id="total_credits" name="total_credits" placeholder="0.0" readonly>
                                 </div>                                
                             </div>
                             
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="cursor:pointer">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">is_active</label>
                             </div>
-                            
-
-
-
-
-                            
+                            <div class="my-2 float-end">
+                                <button type="submit" class="btn btn-success">Promote</button>
+                                <button type="submit" class="btn btn-danger">Detain</button>
+                            </div> 
                         </form>
-
                     </div>
                 </div>
             </div>
