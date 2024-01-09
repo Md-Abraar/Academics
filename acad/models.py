@@ -12,7 +12,8 @@ class Subjects(models.Model):
     end_exam_marks=models.IntegerField()
     cia_marks=models.IntegerField()
     total_marks=models.IntegerField()
-
+    def __str__(self):
+        return self.subject
 
 class Branch(models.Model):
     branch=models.CharField(max_length=60)

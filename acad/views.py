@@ -67,7 +67,7 @@ def show(request):
     # Retrieve and paginate records
     records = Subjects.objects.all()
     page = request.GET.get('page', 1)
-    records_per_page = 10
+    records_per_page = 2
     paginator = Paginator(records, records_per_page)
     try:
         records = paginator.page(page)
