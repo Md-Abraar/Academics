@@ -73,6 +73,7 @@ class Inactive(models.Model):
     inactive_type=models.CharField(max_length=9)
     year=models.IntegerField()
     drop_reason=models.TextField(null=True)
+    is_gap=models.BooleanField(default=False)
     gap_reason=models.TextField(null=True)
 
 

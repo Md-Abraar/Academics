@@ -4,10 +4,10 @@
 <div class="container my-5">
     <!-- Records List -->
     <div class="card">
-        <div class="card-header">
+        <div class="card-header p-3">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Records List</h4>
+                    <h4 class="p-1">Course List</h4>
                 </div>
                 <div class="col-md-6 text-right">
                     <!-- Search or Filter Input -->
@@ -16,20 +16,9 @@
             </div>
         </div>
         <div class="card-body">
-            <form method="post" action="{% url 'add_record' %}">
-                {% csrf_token %}
-                {% comment %} <div class="form-row">
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Name" name="name" required>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Description" name="description" required>
-                    </div>{% endcomment %}
-                    <div class="col">
-                        <button type="submit" class="btn btn-success">Add Record</button>
-                    </div>
-                </div> 
-            </form> 
+      
+            <a href="{% url 'add_record' %}" class="btn btn-success float-end mb-2">Add Record</a>
+       
             <!-- Records Table -->
             <table class="table">
                 <!-- Table Header -->
@@ -158,7 +147,7 @@
             </table>
         </div>
         <!-- Pagination -->
-        <div class="card-footer">
+        <div class="card-footer mt-2">
             <div class="d-flex justify-content-between">
                 <span>Showing {{ records.start_index }} to {{ records.end_index }} of {{ records.paginator.count }} records</span>
                 <ul class="pagination">
