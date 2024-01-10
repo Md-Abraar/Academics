@@ -76,16 +76,8 @@ def show(request):
 
     return render(request, 'show.html', {'records': records})
 
-def add_record(request):
-    # Handle form submission for adding a new record
-    # if request.method == 'POST':
-    #     # Process the form data and save the new record
-    #     # ...
-
-    #     return JsonResponse({'success': True})
-
-    # return JsonResponse({'success': False})
-    return render(request, 'subj.html')
+# def add_record(request):
+#     return render(request, 'subj.html')
 
 @require_POST
 def delete_record(request, record_id):
