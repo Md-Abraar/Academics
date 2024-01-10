@@ -47,7 +47,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <label for="cgpa" class="form-label small">CGPA of student.:</label>
+                                    <label for="cgpa" class="form-label small">CGPA till now:</label>
                                     <input type="number" class="form-control" id="cgpa" name="cgpa" placeholder="0.0" readonly>
                                 </div>
                                 <div class="col-md-4">
@@ -144,11 +144,16 @@
                                     <option disabled selected hidden>--Select option--</option>
                                     <option value="passout">Passout</option>
                                     <option value="dropout">Dropout</option>
+                                    <option value="isgap">Gap</option>
                                   </select>
                             </div>
                             <div class="form-group">
                                 <label for="year">Year:</label>
                                 <input type="text" class="form-control" id="year" name="year" placeholder="Year">
+                            </div>
+                            <div class="form-group">
+                                <label for="gap" id="glabel">Gap period(in years):</label>
+                                <input type="number" class="form-control" id="gap" name="gap" placeholder="Gap years">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="ireason" id="ilabel">Reason:</label>
@@ -182,12 +187,14 @@
         var itype = $('#inactive_type');
         var ireason = $('#ireason');
         var ilabel = $('#ilabel');
+        var glabel = $('#glabel');
+        var ginput = $('#gap');
 
         itype.change(function(){
-            updateTextareaVisibility(itype.val() === "dropout");
+            updateTextareaVisibility(itype.val() === "dropout" || itype.val()==="isgap");
         });
 
-        $('#year').on('input', function(){
+       /* $('#year').on('input', function(){
             if(itype.val()==="passout"){
                 var x = 2020;
                 if(parseInt($('#year').val()) > (x+4)){
@@ -198,9 +205,22 @@
                     updateTextareaVisibility(false);
                 }
             }
-        });
+        });*/
+
 
         function updateTextareaVisibility(show){
+            if(itype.val()==="isgap"){
+                glabel.css('display', 'block');
+                ginput.css('display', 'block');
+                ginput.prop('disabled', false);
+            }
+            else {
+                glabel.css('display', 'none');
+                ginput.css('display', 'none');
+                ginput.prop('disabled', true);
+                ginput.val("");
+            }
+
             if(show===true){
                 ilabel.css('display', 'block');
                 ireason.css('display', 'block');

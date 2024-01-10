@@ -11,5 +11,6 @@ admin.site.register(Detention)
 admin.site.register(Faculty_Mapping)
 admin.site.register(Inactive)
 admin.site.register(Marks)
-admin.register(Gpa)
+admin.site.register(Gpa)
+admin.site.register(Schemes)
 

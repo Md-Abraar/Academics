@@ -30,11 +30,12 @@ class Comprehensive(models.Model):
     roll_no=models.CharField(max_length=10)
     branch=models.CharField(max_length=60)
     semester=models.IntegerField()
-    section=models.CharField(max_length=5)
+    section=models.CharField(max_length=1)
     scheme=models.CharField(max_length=10)
     cgpa=models.DecimalField(max_digits=5, decimal_places=2)
     total_credits=models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
+    is_detained = models.BooleanField(default=True)
 
 class Gpa(models.Model):
         roll_no=models.CharField(max_length=10)
@@ -74,16 +75,14 @@ class Inactive(models.Model):
     inactive_type=models.CharField(max_length=9)
     year=models.IntegerField()
     drop_reason=models.TextField(null=True)
-    is_gap=models.BooleanField(default=False)
+    gap=models.IntegerField(default=0)
     gap_reason=models.TextField(null=True)
 
-
-class YourModel(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.name
+class Schemes(models.Model):
+    scheme=models.CharField(max_length=10)
+    st_year=models.IntegerField()
+    end_year=models.IntegerField()
+    branches=models.JSONField()
 
 
     
