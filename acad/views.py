@@ -65,7 +65,7 @@ def show(request):
     #     YourModel.objects.create(name=f"Record {i}", description=f"Description {i}")
 
     # Retrieve and paginate records
-    records = Subjects.objects.all()
+    records = Subjects.objects.all().order_by('-id')
     page = request.GET.get('page', 1)
     records_per_page = 2
     paginator = Paginator(records, records_per_page)
