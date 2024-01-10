@@ -55,6 +55,7 @@ class Detention(models.Model):
     roll_no=models.CharField(max_length=10)
     finished_sem=models.IntegerField()
     last_scheme=models.CharField(max_length=10)
+    dyear=models.IntegerField()
     reason=models.TextField()
     doc_proof = models.FileField(upload_to='documents/')
 
