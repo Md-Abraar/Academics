@@ -45,12 +45,15 @@ def subject(request):
         end_exam_marks=request.POST.get('end_exam_marks')
         cia_marks=request.POST.get('cia_marks')
         total_marks=request.POST.get('total_marks')
+        branch = request.POST.getlist('branch')
         
        
         mem=Subjects(course_code=course_code,subject=subject, category=category, scheme=scheme,
                       semester=semester, type=type1,credits=credits, end_exam_marks=end_exam_marks,
                     cia_marks=cia_marks, total_marks=total_marks)
         mem.save()
+
+        print(branch)
 
         # con = {'course_code':course_code,'subject':subject,'category':category,'scheme':scheme,
         #      'semester':semester,'type':type1,'credits':credits,'end_exam_marks':end_exam_marks,

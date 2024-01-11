@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Student mapping{% endblock title %}
 {% block body %}
-<div class="container my-5">
+<div class="container   my-5">
     <!-- Course List -->
     <div class="card">
         <div class="card-header p-3">
@@ -9,14 +9,14 @@
                 <div class="col-md-6">
                     <h4 class="p-1">Student-Subject mapping</h4>
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-6">
                     <form>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="scheme">Scheme:</label>
                                 <select class="form-select" id="scheme" name="scheme" aria-label="select scheme">
-                                    <option disabled selected hidden>Scheme</option>
+                                    <option disabled selected hidden>Select scheme</option>
                                     <option value="scheme13">Scheme 13</option>
                                     <option value="scheme17">Scheme 17</option>
                                     <option value="scheme20">Scheme 20</option>
@@ -54,7 +54,7 @@
                                   </select>
                             </div>
                         </div>
-                        <div class="col-md-3 float-end">
+                        <div class="col-md-2">
                             <button type="submit" class="btn btn-primary mt-4">Go</button>
                         </div>
                     

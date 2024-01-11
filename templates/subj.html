@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Subjects{% endblock title %}
 {% block body %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static "bbbootstrap.css" %}">
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -16,7 +20,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="branch" class="form-label small">Branch:</label>
-                                    <input type="text" class="form-control" id="branch" name="branch" placeholder="Branch" required>
+                                    <select id="choices-multiple-remove-button"  name="branch" placeholder="Search" multiple>
+                                        <option value="CSE">CSE</option>
+                                        <option value="ECE">ECE</option>
+                                        <option value="EEE">EEE</option>
+                                        <option value="CIV">CIV</option>
+                                        <option value="MEC">MEC</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="semester" class="form-label small">Semester:</label>
@@ -94,4 +104,18 @@
         </div>
     </div>
 </div>
+<script src="{% static "bbbootstrap.js" %}"></script>
+
+    <script>
+        $(document).ready(function(){
+    
+            var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                removeItemButton: true,
+                maxItemCount:10,
+                searchResultLimit:3,
+                renderChoiceLimit:2
+            }); 
+        });
+    </script>
+
 {% endblock body %}
