@@ -15,9 +15,10 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">       
+        <div class="card-body">  
+            <div class="table-responsive">   
             <!-- Records Table -->
-            <table class="table">
+            <table class="table">  
                 <!-- Table Header -->
                 <thead>
                 <tr>
@@ -115,7 +116,8 @@
                             </div>
                         </div>
                     </div>
-{% comment %} 
+
+                    {% comment %} 
                     <!-- Delete Modal for each record -->
                     <div class="modal" id="deleteModal{{ record.id }}">
                         <div class="modal-dialog">
@@ -141,6 +143,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+        </div>  
         </div> 
         <!-- Pagination -->
         <div class="card-footer mt-2">
