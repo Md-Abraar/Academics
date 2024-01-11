@@ -11,6 +11,13 @@ def student(request):
     }
     return render(request, "comprehensive.html", context)
 
+def generate_rolls(request):
+    for i in range(1, 51):
+        Comprehensive.objects.create(roll_no=f"roll_no {i}", branch=f"branch {i}", semester=f"{i}",
+                                     section=f"section {i}", scheme=f"scheme {i}", cgpa=f"{i}", 
+                                     total_credits=f"{i}")    
+
+    return render(request, "comprehensive.html")
 def inactive(request):
     return render(request, "inactive.html")
 

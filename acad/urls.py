@@ -5,6 +5,7 @@ urlpatterns = [
     path("",views.student, name="student"),
     path("inactive",views.inactive, name="inactive"),
     path("detention",views.detention, name="detention"),
+    path("generate", views.generate_rolls, name="generate_rolls"),
     path("student_mapping",views.student_mapping, name="student_mapping"),
     path("faculty_mapping",views.faculty_mapping, name="faculty_mapping"),
     path("electives",views.electives, name="electives"),

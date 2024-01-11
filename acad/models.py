@@ -35,7 +35,9 @@ class Comprehensive(models.Model):
     cgpa=models.DecimalField(max_digits=5, decimal_places=2)
     total_credits=models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
-    is_detained = models.BooleanField(default=True)
+    is_detained = models.BooleanField(default=False)
+    def __str__(self):
+        return self.roll_no
 
 class Gpa(models.Model):
         roll_no=models.CharField(max_length=10)
