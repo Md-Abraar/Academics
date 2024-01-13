@@ -7,7 +7,8 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="d-flex mt-5 mb-3" id="generate">
-          <a class="btn btn-success btn-sm" href=" {% url "generate_rolls" %} ">Generate new rolls</a><div class="form-text ms-3 p-0">Click this for db update</div>
+          <a id="generate-button" class="btn btn-success btn-sm" href=" {% url 'generate_rolls' %} ">Generate new rolls</a>
+          <div id="update-status" class="form-text ms-3 p-0">Click this for db update</div>
         </div>
         <div class="card card-info mb-5">
           <div class="card-header">
@@ -96,7 +97,7 @@
                   <select class="form-select" id="finished_sem" name="finished_sem" aria-label="select semester">
                     <option disabled selected hidden>--Select option--</option>
                     <option value="1">I</option>
-                    <option value="2">II</option> 
+                    <option value="2">II</option>
                     <option value="3">III</option>
                     <option value="4">IV</option>
                     <option value="5">V</option>
@@ -197,17 +198,17 @@
       })
     
       /* $('#year').on('input', function(){
-                if(itype.val()==="passout"){
-                    var x = 2020;
-                    if(parseInt($('#year').val()) > (x+4)){
-                        //is_gap update here
-                        updateTextareaVisibility(true);
+                    if(itype.val()==="passout"){
+                        var x = 2020;
+                        if(parseInt($('#year').val()) > (x+4)){
+                            //is_gap update here
+                            updateTextareaVisibility(true);
+                        }
+                        else{
+                            updateTextareaVisibility(false);
+                        }
                     }
-                    else{
-                        updateTextareaVisibility(false);
-                    }
-                }
-            });*/
+                });*/
     
       function updateTextareaVisibility(show) {
         if (itype.val() === 'isgap') {
@@ -232,6 +233,13 @@
           ireason.val('')
         }
       }
+    })
+
+    $(document).ready(function(){
+      $('#generate-button').click(function(){
+        if( {{update|lower}} )
+          alert("Updated")
+      })
     })
   </script>
   {% comment %} <script>

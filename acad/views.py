@@ -12,6 +12,13 @@ def student(request):
     return render(request, "comprehensive.html", context)
 
 def generate_rolls(request):
+    if Comprehensive.objects.exists():
+        context = {
+        'update':True
+        }
+        return render(request, "comprehensive.html", context)
+
+
     for i in range(1, 51):
         Comprehensive.objects.create(roll_no=f"roll_no {i}", branch=f"branch {i}", semester=f"{i}",
                                      section=f"section {i}", scheme=f"scheme {i}", cgpa=f"{i}", 
@@ -54,7 +61,10 @@ def subject(request):
         mem.save()
 
         print(branch)
-
+        for i in branch:
+            bran = Branch(branch = i, course_code = course_code)
+            bran.save()
+        
         # con = {'course_code':course_code,'subject':subject,'category':category,'scheme':scheme,
         #      'semester':semester,'type':type1,'credits':credits,'end_exam_marks':end_exam_marks,
         #      'cia_marks':cia_marks,'total_marks':total_marks}
