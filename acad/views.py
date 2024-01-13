@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage
 from acad.models import *
+from django.db.models import Q
 
 # Create your views here.
 def student(request):
@@ -32,6 +33,19 @@ def detention(request):
     return render(request, "detention.html")
 
 def student_mapping(request):
+    if request.method=='POST':
+        pscheme = request.POST.get('scheme')
+        pbranch = request.POST.get('branch')
+        psemester = request.POST.get('semester')
+
+        try:
+            students = Comprehensive.objects.filter(scheme=pscheme,branch=pbranch,semester=psemester,is_active=True)
+            default_students = students.filter(is_detained=False,is_gap=False)
+            other_students = students.filter(Q(is_detained=True) | Q(is_gap=False))
+
+        except Comprehensive.DoesNotExist:
+            print('Not found') #replace with actual handling
+            
     return render(request, "student_mapping.html")
 
 def faculty_mapping(request):
