@@ -36,6 +36,7 @@ class Comprehensive(models.Model):
     total_credits=models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
     is_detained = models.BooleanField(default=False)
+    is_gap = models.BooleanField(default=False)
     def __str__(self):
         return self.roll_no
 
