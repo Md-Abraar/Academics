@@ -61,6 +61,7 @@ def subject(request):
         semester=request.POST.get('semester')
         mode=request.POST.get('mode')
         credits=request.POST.get('credits')
+        type1=request.POST.get('type')
         end_exam_marks=request.POST.get('end_exam_marks')
         cia_marks=request.POST.get('cia_marks')
         total_marks=request.POST.get('total_marks')
@@ -68,7 +69,7 @@ def subject(request):
         
        
         mem=Subjects(course_code=course_code,subject=subject, category=category, scheme=scheme,
-                      semester=semester, mode=mode,credits=credits, end_exam_marks=end_exam_marks,
+                      semester=semester, mode=mode,credits=credits,type=type1, end_exam_marks=end_exam_marks,
                     cia_marks=cia_marks, total_marks=total_marks)
         mem.save()
 
@@ -121,6 +122,7 @@ def edit_record(request, record_id):
     scheme=request.POST.get('scheme')
     semester=request.POST.get('semester')
     mode=request.POST.get('mode')
+    type1=request.POST.get('type')
     credits=request.POST.get('credits')
     end_exam_marks=request.POST.get('end_exam_marks')
     cia_marks=request.POST.get('cia_marks')
@@ -134,6 +136,7 @@ def edit_record(request, record_id):
     mem.scheme=scheme
     mem.semester=semester
     mem.mode=mode
+    mem.type=type1
     mem.credits=credits
     mem.end_exam_marks=end_exam_marks
     mem.cia_marks=cia_marks
