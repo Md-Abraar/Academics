@@ -7,7 +7,7 @@ class Subjects(models.Model):
     category=models.CharField(max_length=6)
     scheme=models.IntegerField()
     semester=models.CharField(max_length=10)
-    type=models.CharField(max_length=10)
+    mode=models.CharField(max_length=10)
     credits=models.DecimalField(max_digits=10, decimal_places=2)
     end_exam_marks=models.IntegerField()
     cia_marks=models.IntegerField()

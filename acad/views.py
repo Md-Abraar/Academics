@@ -51,8 +51,6 @@ def student_mapping(request):
 def faculty_mapping(request):
     return render(request, "faculty_mapping.html")
 
-def electives(request):
-    return render(request, "electives.html")
 
 def subject(request):
     if request.method=='POST':
@@ -61,7 +59,7 @@ def subject(request):
         category=request.POST.get('category')
         scheme=request.POST.get('scheme')
         semester=request.POST.get('semester')
-        type1=request.POST.get('type')
+        mode=request.POST.get('mode')
         credits=request.POST.get('credits')
         end_exam_marks=request.POST.get('end_exam_marks')
         cia_marks=request.POST.get('cia_marks')
@@ -70,7 +68,7 @@ def subject(request):
         
        
         mem=Subjects(course_code=course_code,subject=subject, category=category, scheme=scheme,
-                      semester=semester, type=type1,credits=credits, end_exam_marks=end_exam_marks,
+                      semester=semester, mode=mode,credits=credits, end_exam_marks=end_exam_marks,
                     cia_marks=cia_marks, total_marks=total_marks)
         mem.save()
 
@@ -79,12 +77,6 @@ def subject(request):
             bran = Branch(branch = i, course_code = course_code)
             bran.save()
         
-        # con = {'course_code':course_code,'subject':subject,'category':category,'scheme':scheme,
-        #      'semester':semester,'type':type1,'credits':credits,'end_exam_marks':end_exam_marks,
-        #      'cia_marks':cia_marks,'total_marks':total_marks}
-        
-        # records=Subjects.objects.all()
-        # return render(request, 'show.html',{records:records})
         return redirect('show')
     
     return render(request, "subj.html")
@@ -128,7 +120,7 @@ def edit_record(request, record_id):
     category=request.POST.get('category')
     scheme=request.POST.get('scheme')
     semester=request.POST.get('semester')
-    type1=request.POST.get('type')
+    mode=request.POST.get('mode')
     credits=request.POST.get('credits')
     end_exam_marks=request.POST.get('end_exam_marks')
     cia_marks=request.POST.get('cia_marks')
@@ -141,7 +133,7 @@ def edit_record(request, record_id):
     mem.category=category
     mem.scheme=scheme
     mem.semester=semester
-    mem.type1=type1
+    mem.mode=mode
     mem.credits=credits
     mem.end_exam_marks=end_exam_marks
     mem.cia_marks=cia_marks
