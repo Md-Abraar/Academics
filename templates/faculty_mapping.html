@@ -1,44 +1,428 @@
 {% extends "base.html" %}
 {% block title %}Student marks{% endblock title %}
 {% block body %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card card-info my-5">
-                <div class="card-header">
-                    <div class="p-3">
-                        <form>
-                            
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="branch" class="form-label small">Branch:</label>
-                                    <input type="text" class="form-control" id="branch" name="branch" placeholder="Name of Branch">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="semester" class="form-label small">Semester:</label>
-                                    <input type="number" class="form-control" id="semester" name="semester" placeholder="Semester">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="section" class="form-label small">section:</label>
-                                    <input type="number" class="form-control" id="section" name="section" placeholder="Section">
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="faculty_id" class="form-label small">Faculty Id.:</label>
-                                    <input type="text" class="form-control" id="faculty_id" name="faculty_id" placeholder="Faculty Id">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="course_code" class="form-label small">Course code:</label>
-                                    <input type="text" class="form-control" id="course_code" name="course_code" placeholder="Course code">
-                                </div>
-                            </div>
-                        </form>
+{% load static %}
+<link rel="stylesheet" href="{% static "bbbootstrap.css" %}">
+<div class="container  my-5"> 
+    <div class="row mt-4">
+        <h4 class="p-1 text-center">Faculty-Subject mapping</h4>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="academic_year">Academic year:</label>
+                            <input type="number" class="form-control" id="academic_year" name="academic_year" placeholder="Enter year">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="scheme">Scheme:</label>
+                            <select class="form-select" id="scheme" name="scheme" aria-label="select scheme">
+                                <option disabled selected hidden>Select scheme</option>
+                                <option value="scheme13">Scheme 13</option>
+                                <option value="scheme17">Scheme 17</option>
+                                <option value="scheme20">Scheme 20</option>
+                                <option value="scheme23">Scheme 23</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="branch">Branch:</label>
+                            <select class="form-select" id="branch" name="branch" aria-label="select branch">
+                                <option disabled selected hidden>Branch</option>
+                                <option value="cse">CSE</option>
+                                <option value="ece">ECE</option>
+                                <option value="eee">EEE</option>
+                                <option value="civ">CIV</option>
+                                <option value="mec">MEC</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="semester">Sem:</label>
+                            <select class="form-select" id="semester" name="semester" aria-label="select semester">
+                                <option disabled selected hidden>Semester</option>
+                                <option value="1">I</option>
+                                <option value="2">II</option>
+                                <option value="3">III</option>
+                                <option value="4">IV</option>
+                                <option value="5">V</option>
+                                <option value="6">VI</option>
+                                <option value="7">VII</option>
+                                <option value="8">VIII</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="section">Section:</label>
+                            <select class="form-select" id="section" name="section" aria-label="select section" required>
+                                <option disabled selected hidden>Section</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary mt-4">Go</button>
+                    </div> 
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h5>General subjects:</h5>
+        <div class="table-responsive">
+            <table class="table" id="general">
+                <!-- Table Header -->
+                <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Faculty</th>
+                    <th class="ps-3">
+                        <input type="checkbox" id="g-select" class="btn-check selectAll" onchange="selectAllCheckboxes(this)">
+                        <label for="g-select" class="btn btn-sm btn-outline-dark rounded-circle border-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/></svg>
+                    </label>
+                    </th>
+                </tr>
+                </thead>
+                <!-- Table Body -->
+                <tbody>    
+                    <tr>
+                        <td>Engineering Mathematics I</td>
+                        <td class="col-4">
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>                                                
+                        </td>
+                        <td class="ps-3">
+                            <input type="checkbox" class="btn-check" name="check" onchange="updateSelectAll()" id="g1">
+                            <label for="g1" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Programming for Problem Solving</td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>
+                        </td>
+                        <td class="ps-3">
+                            <input type="checkbox" class="btn-check"  name="check" onchange="updateSelectAll()" id="g2">
+                            <label for="g2" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Database Management Systems</td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>
+                        </td>
+                        <td class="ps-3">
+                            <input type="checkbox" class="btn-check"  name="check" onchange="updateSelectAll()" id="g3">
+                            <label for="g3" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>English</td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>
+                        </td>
+                        <td class="ps-3">
+                            <input type="checkbox" class="btn-check"  name="check" onchange="updateSelectAll()" id="g4">
+                            <label for="g4" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    <div class="row mt-5">
+        <h5>Professional electives:</h5>
+        <div class="table-responsive">
+            <table class="table" id="professional">
+                <!-- Table Header -->
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Subject</th>
+                    <th>Faculty</th>
+                    <th class="ps-3">
+                        <input type="checkbox" id="p-select" class="btn-check selectAll" onchange="selectAllCheckboxes(this)">
+                        <label for="p-select" class="btn btn-sm btn-outline-dark rounded-circle border-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/></svg>
+                    </label>
+                    </th>
+                </tr>
+                </thead>
+                <!-- Table Body -->
+                <tbody>    
+                    <tr>
+                        <td class="col-3">PE-I</td>
+                        <td class="col-4">
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Cloud Computing</option>
+                                <option value="EEE">Deep learning</option>
+                                <option value="EDC">Internet Technologies</option>
+                                <option value="AP">Remote sensing</option>
+                            </select>
+                        </td>
+                        <td class="col-4">
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>                                                
+                        </td>
+                        <td class="col-1 ps-3">
+                            <input type="checkbox" class="btn-check" name="check" onchange="updateSelectAll()" id="p1">
+                            <label for="p1" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PE-II</td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Cloud Computing</option>
+                                <option value="EEE">Deep learning</option>
+                                <option value="EDC">Internet Technologies</option>
+                                <option value="AP">Remote sensing</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>
+                        </td>
+                        <td class="ps-3">
+                            <input type="checkbox" class="btn-check"  name="check" onchange="updateSelectAll()" id="p2">
+                            <label for="p2" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PE-III</td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Cloud Computing</option>
+                                <option value="EEE">Deep learning</option>
+                                <option value="EDC">Internet Technologies</option>
+                                <option value="AP">Remote sensing</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>
+                        </td>
+                        <td class="ps-3">
+                            <input type="checkbox" class="btn-check"  name="check" onchange="updateSelectAll()" id="p3">
+                            <label for="p3" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h5>Open electives:</h5>
+        <div class="table-responsive">
+            <table class="table" id="open">
+                <!-- Table Header -->
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Subject</th>
+                    <th>Faculty</th>
+                    <th class="ps-3">
+                        <input type="checkbox" id="o-select" class="btn-check selectAll" onchange="selectAllCheckboxes(this)">
+                        <label for="o-select" class="btn btn-sm btn-outline-dark rounded-circle border-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/></svg>
+                    </label>
+                    </th>
+                </tr>
+                </thead>
+                <!-- Table Body -->
+                <tbody>    
+                    <tr>
+                        <td class="col-3">OE-I</td>
+                        <td class="col-4">
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Cloud Computing</option>
+                                <option value="EEE">Deep learning</option>
+                                <option value="EDC">Internet Technologies</option>
+                                <option value="AP">Remote sensing</option>
+                            </select>
+                        </td>
+                        <td class="col-4">
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>                                                
+                        </td>
+                        <td class="col-1 ps-3">
+                            <input type="checkbox" class="btn-check" name="check" onchange="updateSelectAll()" id="o1">
+                            <label for="o1" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OE-II</td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Cloud Computing</option>
+                                <option value="EEE">Deep learning</option>
+                                <option value="EDC">Internet Technologies</option>
+                                <option value="AP">Remote sensing</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="choices-multiple-remove-button">
+                                <option selected disabled hidden placeholder="">Search</option>
+                                <option value="EM1">Vijay Kumar</option>
+                                <option value="EEE">Nandan Reddy</option>
+                                <option value="EDC">Gyaanadhar</option>
+                                <option value="AP">Leelavathi</option>
+                                <option value="EM2">Ravi shastri</option>
+                            </select>
+                        </td>
+                        <td class="ps-3">
+                            <input type="checkbox" class="btn-check"  name="check" onchange="updateSelectAll()" id="o2">
+                            <label for="o2" class="btn btn-sm btn-outline-primary rounded-circle border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
+<script src="{% static "bbbootstrap.js" %}"></script>
+<script>
+    $(document).ready(function(){
+
+        var multipleCancelButton = new Choices('.choices-multiple-remove-button', {
+            removeItemButton: true,
+            maxItemCount:1,
+            searchResultLimit:3,
+            renderChoiceLimit:1
+        }); 
+    });
+
+    
+    function selectAllCheckboxes(headerCheckbox) {
+        var checkboxes = headerCheckbox.closest("table").querySelectorAll("tbody input[type='checkbox']");
+    
+        checkboxes.forEach(function(checkbox) {
+          checkbox.checked = headerCheckbox.checked;
+        });
+      }
+    
+      function updateSelectAll() {
+        var checkbox = event.target;
+        var table = checkbox.closest("table");
+        var headerCheckbox = table.querySelector(".selectAll");
+        var checkboxes = table.querySelectorAll("tbody input[type='checkbox']");
+        var allChecked = true;
+    
+        checkboxes.forEach(function(cb) {
+          if (!cb.checked) {
+            allChecked = false;
+          }
+        });
+    
+        headerCheckbox.checked = allChecked;
+      }
+</script>
 {% endblock body %}
