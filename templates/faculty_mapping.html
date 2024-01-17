@@ -112,7 +112,7 @@
                                 <option value="EM2">Ravi shastri</option>
                             </select>                                                
                         </td>
-                        <td class="ps-3">
+                        <td class="ps-3 col-1">
                             <input type="checkbox" class="btn-check" name="check" onchange="updateSelectAll()" id="g1">
                             <label for="g1" class="btn btn-sm btn-outline-primary rounded-circle border-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
@@ -305,6 +305,40 @@
     </div>
     <div class="row mt-5">
         <h5>Open electives:</h5>
+        <div class="row my-3">
+            <div class="col-md-3">
+                <select name="ocategory" id="ocategory" class="form-select">
+                    <option value="OE1">OE-I</option>
+                    <option value="OE2">OE-II</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="choices-multiple-remove-button">
+                    <option selected disabled hidden placeholder="">Search</option>
+                    <option value="EM1">Cloud Computing</option>
+                    <option value="EEE">Deep learning</option>
+                    <option value="EDC">Internet Technologies</option>
+                    <option value="AP">Remote sensing</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="choices-multiple-remove-button">
+                    <option selected disabled hidden placeholder="">Search</option>
+                    <option value="EM1">Vijay Kumar</option>
+                    <option value="EEE">Nandan Reddy</option>
+                    <option value="EDC">Gyaanadhar</option>
+                    <option value="AP">Leelavathi</option>
+                    <option value="EM2">Ravi shastri</option>
+                </select> 
+            </div>
+            <div class="col-md-1 p-1">
+                <button type="button" class="btn btn-sm btn-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" stroke="currentColor" stroke-width="1"></path>
+                    </svg>
+                  </button>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table" id="open">
                 <!-- Table Header -->
@@ -324,62 +358,28 @@
                 <tbody>    
                     <tr>
                         <td class="col-3">OE-I</td>
-                        <td class="col-4">
-                            <select class="choices-multiple-remove-button">
-                                <option selected disabled hidden placeholder="">Search</option>
-                                <option value="EM1">Cloud Computing</option>
-                                <option value="EEE">Deep learning</option>
-                                <option value="EDC">Internet Technologies</option>
-                                <option value="AP">Remote sensing</option>
-                            </select>
-                        </td>
-                        <td class="col-4">
-                            <select class="choices-multiple-remove-button">
-                                <option selected disabled hidden placeholder="">Search</option>
-                                <option value="EM1">Vijay Kumar</option>
-                                <option value="EEE">Nandan Reddy</option>
-                                <option value="EDC">Gyaanadhar</option>
-                                <option value="AP">Leelavathi</option>
-                                <option value="EM2">Ravi shastri</option>
-                            </select>                                                
-                        </td>
-                        <td class="col-1 ps-3">
-                            <input type="checkbox" class="btn-check" name="check" onchange="updateSelectAll()" id="o1">
-                            <label for="o1" class="btn btn-sm btn-outline-primary rounded-circle border-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
-                                </svg>
-                            </label>
+                        <td class="col-4">Cloud computing</td>
+                        <td class="col-4">Vijay Kumar</td>
+                        <td class="ps-3">
+                            <!-- Delete Record Icon -->
+                            <button class="btn btn-sm btn-danger">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                  </svg>
+                            </button>
                         </td>
                     </tr>
                     <tr>
                         <td>OE-II</td>
-                        <td>
-                            <select class="choices-multiple-remove-button">
-                                <option selected disabled hidden placeholder="">Search</option>
-                                <option value="EM1">Cloud Computing</option>
-                                <option value="EEE">Deep learning</option>
-                                <option value="EDC">Internet Technologies</option>
-                                <option value="AP">Remote sensing</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="choices-multiple-remove-button">
-                                <option selected disabled hidden placeholder="">Search</option>
-                                <option value="EM1">Vijay Kumar</option>
-                                <option value="EEE">Nandan Reddy</option>
-                                <option value="EDC">Gyaanadhar</option>
-                                <option value="AP">Leelavathi</option>
-                                <option value="EM2">Ravi shastri</option>
-                            </select>
-                        </td>
+                        <td>Deep Learning</td>
+                        <td>Ravi shastri</td>
                         <td class="ps-3">
-                            <input type="checkbox" class="btn-check"  name="check" onchange="updateSelectAll()" id="o2">
-                            <label for="o2" class="btn btn-sm btn-outline-primary rounded-circle border-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" stroke="currentColor" stroke-width="1"/>
-                                </svg>
-                            </label>
+                            <!-- Delete Record Icon -->
+                            <button class="btn btn-sm btn-danger">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                  </svg>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
