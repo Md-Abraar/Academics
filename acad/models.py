@@ -57,11 +57,12 @@ class Electives(models.Model):
     chosen_subject=models.CharField(max_length=50)
 
 class Detention(models.Model):
-    roll_no=models.CharField(max_length=10)
-    finished_sem=models.IntegerField()
-    last_scheme=models.CharField(max_length=10)
-    dyear=models.IntegerField()
-    reason=models.TextField()
+    roll_no = models.CharField(max_length=10)
+    finished_sem = models.IntegerField()
+    last_scheme = models.CharField(max_length=10)
+    dtype = models.CharField(max_length=15)
+    dyear = models.IntegerField()
+    reason = models.TextField()
     doc_proof = models.FileField(upload_to='documents/')
 
 class Marks(models.Model):
