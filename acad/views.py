@@ -8,16 +8,17 @@ from django.db.models import Q
 # Create your views here.
 def student(request):
     context = {
-        'detained':False
+        'detained':False,
+        'update': False
     }
     return render(request, "comprehensive.html", context)
 
 def generate_rolls(request):
     if Comprehensive.objects.exists():
         context = {
-        'update':True
+            'update':True
         }
-        return render(request, "comprehensive.html", context)
+    return render(request, "comprehensive.html", context)
 
 
     for i in range(1, 51):
