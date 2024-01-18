@@ -94,7 +94,7 @@ def show(request):
     # Retrieve and paginate records
     records = Subjects.objects.all().order_by('-id')
     page = request.GET.get('page', 1)
-    records_per_page = 2
+    records_per_page = 4
     paginator = Paginator(records, records_per_page)
     try:
         records = paginator.page(page)
