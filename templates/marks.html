@@ -1,68 +1,129 @@
 {% extends "base.html" %}
 {% block title %}Comprehensive{% endblock title %}
 {% block body %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card card-info my-5">
-                <div class="card-header">
-                    <div class="p-3">
-                        <form>
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="rollno" class="form-label small">Roll No.:</label>
-                                    <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Roll No.of student">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="subject" class="form-label small">Subject:</label>
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="semester" class="form-label small">Semester:</label>
-                                    <input type="text" class="form-control" id="semester" name="semester" placeholder="Semester">
-                                </div>
-                                
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="cia_marks" class="form-label small">Internal:</label>
-                                    <input type="number" class="form-control" id="cia_marks" name="cia_marks" placeholder="CIA marks">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="end_exam_marks" class="form-label small">External:</label>
-                                    <input type="number" class="form-control" id="end_exam_marks" name="end_exam_marks" placeholder="End exam marks">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="total_marks" class="form-label small">Total:</label>
-                                    <input type="number" class="form-control" id="total_marks" name="total_marks" placeholder="Toatl marks">
-                                </div>                                
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="credits" class="form-label small">Credits:</label>
-                                    <input type="text" class="form-control" id="credits" name="credits" placeholder="Credits">
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="backlog">
-                                <label class="form-check-label" for="backlog">backlog</label>
-                            </div>
-                            
-
-
-
-
-                            
-                        </form>
-
+<div class="container  my-5"> 
+    <div class="row mt-4">
+        <h4 class="p-1 text-center">Marks</h4>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="fid">Faculty id</label>
+                            <select name="fid" id="fid" class="form-select">
+                                <option disabled selected hidden>Select id</option>
+                                <option value="111">111</option>
+                                <option value="112">112</option>
+                                <option value="113">113</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="year">Year:</label>
+                            <input type="number" class="form-control" id="year" name="year" placeholder="Enter year">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="month">Month:</label>
+                            <select class="form-select" id="month" name="month" aria-label="select month">
+                                <option disabled selected hidden>month</option>
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>                 
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary mt-4">Go</button>
+                    </div> 
+                </div>
+            </form>
         </div>
     </div>
+    <div class="row mt-5">
+        <h5>General subjects:</h5>
+        <div class="table-responsive">
+            <table class="table" id="general">
+                <!-- Table Header -->
+                <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Class</th>
+                    <th>Section</th>
+                    <th class="ps-3">
+                        >>
+                    </th>
+                </tr>
+                </thead>
+                <!-- Table Body -->
+                <tbody>    
+                    <tr>
+                        <td>Engineering Mathematics I</td>
+                        <td class="col-2">I MEC</td>
+                        <td class="col-2">B</td>
+                        <td class="ps-3 col-2">
+                            <a href="/marks/enter" class="btn btn-sm btn-primary border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="1 1 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Programming for Problem Solving</td>
+                        <td>III CST</td>
+                        <td>A</td>
+                        <td class="ps-3">
+                            <a href="/marks/enter" class="btn btn-sm btn-primary border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="1 1 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Database Management Systems</td>
+                        <td>II ECE</td>
+                        <td>B</td>
+                        <td class="ps-3">
+                            <a href="/marks/enter" class="btn btn-sm btn-primary border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="1 1 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>English</td>
+                        <td>I EEE</td>
+                        <td>C</td>
+                        <td class="ps-3">
+                            <a href="/marks/enter" class="btn btn-sm btn-primary  border-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="1 1 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>    
+                </tbody>
+            </table>
+        </div> 
+    </div>
 </div>
-
-
 {% endblock body %}

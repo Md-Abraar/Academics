@@ -12,5 +12,6 @@ urlpatterns = [
     path("marks", views.marks, name="marks"),
     path('show', views.show, name='show'),
     path('delete/<int:record_id>/', views.delete_record, name='delete_record'),
-    path('edit/<int:record_id>/', views.edit_record, name='edit_record')
+    path('edit/<int:record_id>/', views.edit_record, name='edit_record'),
+    path('marks/enter', views.enter, name="enter")
 ]

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Comprehensive{% endblock title %}
+{% block body %}
+<div class="container  my-5"> 
+    <div class="row mt-4">
+        <h4 class="p-1 text-center">Marks</h4>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control-plaintext fw-bold fst-italic" id="year" name="year" value="2022" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control-plaintext fw-bold fst-italic" id="month" name="month" aria-label="select month" disabled>
+                                <option value="1" selected>Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>                 
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 d-flex">
+                        <div class="form-group">
+                            <input type="text" name="class" id="class" class="form-control-plaintext" readonly value="III CST">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="section" id="section" class="form-control-plaintext" readonly value="A">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <input type="text" name="subject" id="subject" class="form-control-plaintext fw-bold" readonly value="Engineering Mathematics I">
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h5>Enter marks:</h5>
+        <div class="table-responsive">
+            <table class="table">
+                <!-- Table Header -->
+                <thead>
+                <tr>
+                    <th>Roll no</th>
+                    <th class="col-sm-2 col-md-3">Internal</th>
+                    <th class="col-sm-2 col-md-3">External</th>
+                    <th class="col-sm-2 col-md-3">Total&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+                </thead>
+                <!-- Table Body -->
+                <tbody>    
+                    <tr>
+                        <td>209X1A2800</td>
+                        <td>
+                            <input type="number" name="internal" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="external" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="total" id="" class="form-control border-dark" value=0>
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td>209X1A2800</td>
+                        <td>
+                            <input type="number" name="internal" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="external" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="total" id="" class="form-control border-dark" value=0>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>209X1A2800</td>
+                        <td>
+                            <input type="number" name="internal" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="external" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="total" id="" class="form-control border-dark" value=0>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>209X1A2800</td>
+                        <td>
+                            <input type="number" name="internal" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="external" id="" class="form-control border-dark" value=0>
+                        </td>
+                        <td>
+                            <input type="number" name="total" id="" class="form-control border-dark" value=0>
+                        </td>
+                    </tr>   
+                </tbody>
+            </table>
+        </div> 
+    </div>
+</div>
+{% endblock body %}

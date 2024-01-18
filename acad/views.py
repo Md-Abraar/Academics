@@ -144,15 +144,6 @@ def edit_record(request, record_id):
     mem.save()
     return redirect("show")
 
-
-
-
-    # rec=Subjects.objects.get(id=record_id)
-    # return render(request, "show.html", {'record':rec})
-    # if request.method == 'POST':
-    #     # Handle form submission for editing the record
-    #     # ...
-
-    #     return JsonResponse({'success': True})
-    # return JsonResponse({'success': False})
+def enter(request):
+    return render(request, 'entermarks.html')
 
