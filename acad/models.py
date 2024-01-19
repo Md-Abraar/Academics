@@ -62,6 +62,7 @@ class Detention(models.Model):
     last_scheme = models.CharField(max_length=10)
     dtype = models.CharField(max_length=15)
     dyear = models.IntegerField()
+    attendance_percentage = models.DecimalField(max_digits=5,decimal_places=2)
     reason = models.TextField()
     doc_proof = models.FileField(upload_to='documents/')
 
