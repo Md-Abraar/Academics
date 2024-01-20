@@ -175,7 +175,7 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    /*document.addEventListener('DOMContentLoaded', function () {
         var input = document.getElementById('searchInput');
         var table = document.getElementById('dataTable');
         var rows = table.getElementsByTagName('tr');
@@ -194,6 +194,32 @@
                 } else {
                     rows[i].style.display = 'none';
                 }
+            }
+        });
+    });*/
+    document.addEventListener('DOMContentLoaded', function () {
+        var input = document.getElementById('searchInput');
+        var table = document.getElementById('dataTable');
+        var rows = table.getElementsByTagName('tr');
+    
+        input.addEventListener('keyup', function () {
+            var filter = input.value.toLowerCase();
+    
+            for (var i = 1; i < rows.length; i++) {
+                var isVisible = false;  // Assume the row is not visible initially
+    
+                // Iterate through all cells in the current row
+                for (var j = 0; j < rows[i].cells.length; j++) {
+                    var cellContent = rows[i].cells[j].textContent.toLowerCase();
+    
+                    if (cellContent.indexOf(filter) > -1) {
+                        isVisible = true;  // If any cell contains the filter, mark the row as visible
+                        break;
+                    }
+                }
+    
+                // Display or hide the row based on the search result
+                rows[i].style.display = isVisible ? '' : 'none';
             }
         });
     });
