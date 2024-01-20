@@ -6,7 +6,7 @@ class Subjects(models.Model):
     subject=models.CharField(max_length=50)
     category=models.CharField(max_length=6)
     scheme=models.IntegerField()
-    semester=models.CharField(max_length=10)
+    semester=models.IntegerField()
     mode=models.CharField(max_length=10)
     credits=models.DecimalField(max_digits=10, decimal_places=2)
     type=models.CharField(max_length=10)

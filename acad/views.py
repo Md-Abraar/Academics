@@ -13,25 +13,28 @@ def student(request):
     }
     return render(request, "comprehensive.html", context)
 
+
 def generate_rolls(request):
     if Comprehensive.objects.exists():
         context = {
             'update':True
         }
     return render(request, "comprehensive.html", context)
+    # for i in range(1, 51):
+    #     Comprehensive.objects.create(roll_no=f"roll_no {i}", branch=f"branch {i}", semester=f"{i}",
+    #                                  section=f"section {i}", scheme=f"scheme {i}", cgpa=f"{i}", 
+    #                                  total_credits=f"{i}")    
+
+    # return render(request, "comprehensive.html")
 
 
-    for i in range(1, 51):
-        Comprehensive.objects.create(roll_no=f"roll_no {i}", branch=f"branch {i}", semester=f"{i}",
-                                     section=f"section {i}", scheme=f"scheme {i}", cgpa=f"{i}", 
-                                     total_credits=f"{i}")    
-
-    return render(request, "comprehensive.html")
 def inactive(request):
     return render(request, "inactive.html")
 
+
 def detention(request):
     return render(request, "detention.html")
+
 
 def student_mapping(request):
     if request.method=='POST':
@@ -43,11 +46,11 @@ def student_mapping(request):
             students = Comprehensive.objects.filter(scheme=pscheme,branch=pbranch,semester=psemester,is_active=True)
             default_students = students.filter(is_detained=False,is_gap=False)
             other_students = students.filter(Q(is_detained=True) | Q(is_gap=False))
-
         except Comprehensive.DoesNotExist:
-            print('Not found') #replace with actual handling
-            
+            print('Not found') #replace with actual handling  
+     
     return render(request, "student_mapping.html")
+
 
 def faculty_mapping(request):
     return render(request, "faculty_mapping.html")
@@ -68,48 +71,62 @@ def subject(request):
         total_marks=request.POST.get('total_marks')
         branch = request.POST.getlist('branch')
         
-       
         mem=Subjects(course_code=course_code,subject=subject, category=category, scheme=scheme,
                       semester=semester, mode=mode,credits=credits,type=type1, end_exam_marks=end_exam_marks,
                     cia_marks=cia_marks, total_marks=total_marks)
         mem.save()
 
-        print(branch)
         for i in branch:
             bran = Branch(branch = i, course_code = course_code)
             bran.save()
-        
         return redirect('show')
-    
     return render(request, "subj.html")
 
 
 def marks(request):
     return render(request, "marks.html")
 
-def show(request):
-    # Create dummy records
-    # for i in range(1, 51):
-    #     YourModel.objects.create(name=f"Record {i}", description=f"Description {i}")
 
-    # Retrieve and paginate records
-    records = Subjects.objects.all().order_by('-id')
+def show(request):
+    # records = Subjects.objects.all().order_by('-id')
+    # page = request.GET.get('page', 1)
+    # records_per_page = 4
+    # paginator = Paginator(records, records_per_page)
+    # try:
+    #     records = paginator.page(page)
+    # except EmptyPage:
+    #     records = paginator.page(paginator.num_pages)
+    # return render(request, 'show.html', {'records': records})
+    
+    # Retrieve subject records
+    subjects_records = Subjects.objects.all().order_by('-id')
+    
+    # Iterate through subject records and fetch associated branches
+    subjects_with_branches = []
+    for subject_record in subjects_records:
+        # Assuming you have a ForeignKey named 'course' in Subjects model
+        course_code = subject_record.course_code
+        branches = Branch.objects.filter(course_code=course_code).values_list('branch', flat=True)
+        subjects_with_branches.append({'subject': subject_record, 'branches': branches})
+
+    # Paginate the combined list
     page = request.GET.get('page', 1)
     records_per_page = 4
-    paginator = Paginator(records, records_per_page)
+    paginator = Paginator(subjects_with_branches, records_per_page)
+    
     try:
         records = paginator.page(page)
     except EmptyPage:
         records = paginator.page(paginator.num_pages)
-
+    
     return render(request, 'show.html', {'records': records})
 
-# def add_record(request):
-#     return render(request, 'subj.html')
 
 @require_POST
 def delete_record(request, record_id):
     # Handle record deletion
+    branches = Branch.objects.filter(course_code=Subjects.objects.get(id=record_id).course_code)
+    branches.delete()
     record = get_object_or_404(Subjects, id=record_id)
     record.delete()
     # return JsonResponse({'success': True})
@@ -128,7 +145,8 @@ def edit_record(request, record_id):
     end_exam_marks=request.POST.get('end_exam_marks')
     cia_marks=request.POST.get('cia_marks')
     total_marks=request.POST.get('total_marks')
-
+    branch = request.POST.getlist('branch')
+    
     mem=Subjects.objects.get(id=record_id)
     
     mem.course_code=course_code
@@ -143,6 +161,14 @@ def edit_record(request, record_id):
     mem.cia_marks=cia_marks
     mem.total_marks=total_marks
     mem.save()
+
+    #Delete already present entries and update with new ones
+    Branch.objects.filter(course_code=course_code).delete()
+
+    for i in branch:
+        bran = Branch(branch = i, course_code = course_code)
+        bran.save()
+        
     return redirect("show")
 
 def enter(request):
