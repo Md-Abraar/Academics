@@ -100,14 +100,14 @@
                                                             <label for="semester">Semester:</label>
                                                             <select name="semester" id="semester" class="form-select">
                                                                 <option disabled selected hidden>--Select option--</option>
-                                                                <option value="1" {% if record.subject.semester == 1 %}selected{% endif %}>I</option>
-                                                                <option value="2" {% if record.subject.semester == 2 %}selected{% endif %}>II</option>
-                                                                <option value="3" {% if record.subject.semester == 3 %}selected{% endif %}>III</option>
-                                                                <option value="4" {% if record.subject.semester == 4 %}selected{% endif %}>IV</option>
-                                                                <option value="5" {% if record.subject.semester == 5 %}selected{% endif %}>V</option>
-                                                                <option value="6" {% if record.subject.semester == 6 %}selected{% endif %}>VI</option>
-                                                                <option value="7" {% if record.subject.semester == 7 %}selected{% endif %}>VII</option>
-                                                                <option value="8" {% if record.subject.semester == 8 %}selected{% endif %}>VII</option>
+                                                                <option value="1" {% if record.subject.semester == "1" %}selected{% endif %}>I</option>
+                                                                <option value="2" {% if record.subject.semester == "2" %}selected{% endif %}>II</option>
+                                                                <option value="3" {% if record.subject.semester == "3" %}selected{% endif %}>III</option>
+                                                                <option value="4" {% if record.subject.semester == "4" %}selected{% endif %}>IV</option>
+                                                                <option value="5" {% if record.subject.semester == "5" %}selected{% endif %}>V</option>
+                                                                <option value="6" {% if record.subject.semester == "6" %}selected{% endif %}>VI</option>
+                                                                <option value="7" {% if record.subject.semester == "7" %}selected{% endif %}>VII</option>
+                                                                <option value="8" {% if record.subject.semester == "8" %}selected{% endif %}>VII</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
