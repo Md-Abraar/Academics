@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
+from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage
@@ -20,12 +21,6 @@ def generate_rolls(request):
             'update':True
         }
     return render(request, "comprehensive.html", context)
-    # for i in range(1, 51):
-    #     Comprehensive.objects.create(roll_no=f"roll_no {i}", branch=f"branch {i}", semester=f"{i}",
-    #                                  section=f"section {i}", scheme=f"scheme {i}", cgpa=f"{i}", 
-    #                                  total_credits=f"{i}")    
-
-    # return render(request, "comprehensive.html")
 
 
 def inactive(request):
@@ -88,18 +83,20 @@ def marks(request):
 
 
 def show(request):
-    # records = Subjects.objects.all().order_by('-id')
-    # page = request.GET.get('page', 1)
-    # records_per_page = 4
-    # paginator = Paginator(records, records_per_page)
-    # try:
-    #     records = paginator.page(page)
-    # except EmptyPage:
-    #     records = paginator.page(paginator.num_pages)
-    # return render(request, 'show.html', {'records': records})
-    
+    scheme_filter = request.GET.get('scheme', '')
+    sem_filter = request.GET.get('semester', '')
+    type_filter = request.GET.get('type', '')  
+    search_query = request.GET.get('search', '')
     # Retrieve subject records
-    subjects_records = Subjects.objects.all().order_by('-id')
+    all_records = Subjects.objects.all().order_by('-id')
+    if scheme_filter:
+        all_records = all_records.filter(scheme=scheme_filter)
+    if sem_filter:
+        all_records = all_records.filter(semester=sem_filter)
+    if type_filter:
+        all_records = all_records.filter(type=type_filter)
+
+    subjects_records = all_records.filter(subject__contains=search_query).order_by('-id')
     
     # Iterate through subject records and fetch associated branches
     subjects_with_branches = []
@@ -119,7 +116,14 @@ def show(request):
     except EmptyPage:
         records = paginator.page(paginator.num_pages)
     
-    return render(request, 'show.html', {'records': records})
+    context = {
+        'records':records,
+        'search_query':search_query,
+        'scheme_filter':scheme_filter,
+        'sem_filter':sem_filter,
+        'type_filter':type_filter
+    }
+    return render(request, 'show.html', context)
 
 
 @require_POST
