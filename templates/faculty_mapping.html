@@ -22,10 +22,10 @@
                             <label for="scheme">Scheme:</label>
                             <select class="form-select" id="scheme" name="scheme" aria-label="select scheme">
                                 <option disabled selected hidden>Select scheme</option>
-                                <option value="scheme13">Scheme 13</option>
+                                {% comment %} <option value="scheme13">Scheme 13</option>
                                 <option value="scheme17">Scheme 17</option>
                                 <option value="scheme20">Scheme 20</option>
-                                <option value="scheme23">Scheme 23</option>
+                                <option value="scheme23">Scheme 23</option> {% endcomment %}
                             </select>
                         </div>
                     </div>
@@ -36,11 +36,11 @@
                             <label for="branch">Branch:</label>
                             <select class="form-select" id="branch" name="branch" aria-label="select branch">
                                 <option disabled selected hidden>Branch</option>
-                                <option value="cse">CSE</option>
+                                {% comment %} <option value="cse">CSE</option>
                                 <option value="ece">ECE</option>
                                 <option value="eee">EEE</option>
                                 <option value="civ">CIV</option>
-                                <option value="mec">MEC</option>
+                                <option value="mec">MEC</option> {% endcomment %}
                             </select>
                         </div>
                     </div>
@@ -424,5 +424,36 @@
     
         headerCheckbox.checked = allChecked;
       }
+
+      $(document).ready(function () {
+        var schemeDropdown = $('#scheme');
+        var scheme_data = {{ scheme_data|safe }};
+        var branchDropdown = $('#branch') // Initialize Choices instance
+        console.log(scheme_data)
+        // Populate Scheme dropdown
+        scheme_data.forEach(function (scheme) {
+            schemeDropdown.append('<option value="' + scheme.scheme + '">' + scheme.scheme + '</option>');
+        });
+
+        // Event handler for Scheme dropdown change
+        schemeDropdown.change(function () {
+            var selectedScheme = $(this).val();
+            console.log(selectedScheme);
+            var selectedSchemeData = scheme_data.find(function (sch) {
+                return sch['scheme'] === selectedScheme;
+            });
+
+            // Clear existing options in Branch dropdown
+            branchDropdown.empty();
+            branchDropdown.append('<option disabled selected hidden>Branch</option>');
+
+            // Populate Branch dropdown with branches of the selected scheme
+            if (selectedSchemeData) {
+                selectedSchemeData.branches.forEach(function (branch) {
+                    branchDropdown.append('<option value="' + branch + '">' + branch + '</option>');
+                });
+            }
+        });
+    });
 </script>
 {% endblock body %}

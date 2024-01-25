@@ -5,7 +5,7 @@ class Subjects(models.Model):
     course_code=models.CharField(max_length=10)
     subject=models.CharField(max_length=50)
     category=models.CharField(max_length=6)
-    scheme=models.IntegerField()
+    scheme=models.CharField(max_length=10)
     semester=models.IntegerField()
     mode=models.CharField(max_length=10)
     credits=models.DecimalField(max_digits=10, decimal_places=2)
@@ -88,7 +88,9 @@ class Schemes(models.Model):
     scheme=models.CharField(max_length=10)
     st_year=models.IntegerField()
     end_year=models.IntegerField()
-    branches=models.JSONField()
+    branches=models.TextField()
+    def __str__(self):
+        return self.scheme
 
 
     

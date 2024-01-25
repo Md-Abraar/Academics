@@ -44,7 +44,12 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="scheme" class="form-label small">Scheme:</label>
-                    <input type="text" class="form-control" id="scheme" name="scheme" placeholder="Scheme" />
+                    <select id="scheme" class="form-select"  name="scheme" placeholder="Search">
+                      {% for sch in scheme_data %}
+                          <option value=" {{sch}} "> {{sch}} </option>
+                      {% endfor %}
+                    </select>
+
                   </div>
                   <div class="col-md-6">
                     <label for="section" class="form-label small">Section:</label>
