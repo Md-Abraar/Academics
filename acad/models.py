@@ -88,7 +88,7 @@ class Schemes(models.Model):
     scheme=models.CharField(max_length=10)
     st_year=models.IntegerField()
     end_year=models.IntegerField()
-    branches=models.TextField()
+    branches=models.TextField(help_text="Enter branches seperated by space.. Example: CSE ECE MEC")
     def __str__(self):
         return self.scheme
 
