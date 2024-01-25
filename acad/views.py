@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import redirect, render, get_object_or_404
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -5,6 +6,7 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage
 from acad.models import *
 from django.db.models import Q
+from django.utils.safestring import SafeString
 
 # Create your views here.
 def student(request):
@@ -12,14 +14,18 @@ def student(request):
         'detained':False,
         'update': False
     }
-    return render(request, "comprehensive.html", context)
-
+    scheme_data = Schemes.objects.values_list('scheme', flat=True)
+    scheme_data={'scheme_data':scheme_data}
+    # print(scheme_data)    
+    con={**context, **scheme_data}
+    return render(request, "comprehensive.html", con)
 
 def generate_rolls(request):
     if Comprehensive.objects.exists():
         context = {
             'update':True
         }
+        
     return render(request, "comprehensive.html", context)
 
 
@@ -43,13 +49,36 @@ def student_mapping(request):
             other_students = students.filter(Q(is_detained=True) | Q(is_gap=False))
         except Comprehensive.DoesNotExist:
             print('Not found') #replace with actual handling  
+    scheme_data = get_scheme_data()
+    context = {'scheme_data': SafeString(scheme_data)}
+    print(context) 
      
-    return render(request, "student_mapping.html")
+    return render(request, "student_mapping.html", context )
 
 
 def faculty_mapping(request):
-    return render(request, "faculty_mapping.html")
+    scheme_data = get_scheme_data()
+    context = {'scheme_data': SafeString(scheme_data)}
+    print(context) 
 
+    return render(request, "faculty_mapping.html", context)
+
+def get_scheme_data():
+    schemes = Schemes.objects.all()
+    
+    data_list = []
+    for scheme in schemes:
+        
+        branch_list = scheme.branches.split()
+
+        scheme_data = {
+            'scheme': scheme.scheme,
+            'branches': branch_list,
+        }
+
+        data_list.append(scheme_data)
+
+    return data_list
 
 def subject(request):
     if request.method=='POST':
@@ -66,16 +95,24 @@ def subject(request):
         total_marks=request.POST.get('total_marks')
         branch = request.POST.getlist('branch')
         
-        mem=Subjects(course_code=course_code,subject=subject, category=category, scheme=scheme,
-                      semester=semester, mode=mode,credits=credits,type=type1, end_exam_marks=end_exam_marks,
-                    cia_marks=cia_marks, total_marks=total_marks)
-        mem.save()
+        mem=Subjects(course_code = course_code, subject = subject, category = category, scheme = scheme,
+                      semester = semester, mode = mode,credits = credits,type = type1, end_exam_marks = end_exam_marks,
+                    cia_marks = cia_marks, total_marks = total_marks)
+        mem.save()    
+        print(branch)
 
         for i in branch:
             bran = Branch(branch = i, course_code = course_code)
             bran.save()
         return redirect('show')
-    return render(request, "subj.html")
+    # scheme_data = Schemes.objects.values('scheme')
+
+    # scheme_data = Schemes.objects.all()
+    # scheme_list = scheme_data.values_list('scheme', flat=True)
+    scheme_data = get_scheme_data()
+    context = {'scheme_data': scheme_data}
+    print(scheme_data)
+    return render(request, "subj.html", {'scheme_data':SafeString(scheme_data)})
 
 
 def marks(request):

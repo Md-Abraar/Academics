@@ -1,6 +1,7 @@
 from django.contrib import admin
 from acad.models import *
 
+
 # Register your models here.
 admin.site.register(Subjects)
 admin.site.register(Comprehensive)
@@ -16,6 +17,6 @@ admin.site.register(Schemes)
 class BranchAdmin(admin.ModelAdmin):
   list_display = ("branch", "course_code")
 
-
 admin.site.register(Branch,BranchAdmin)
+
 
