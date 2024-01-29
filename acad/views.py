@@ -21,6 +21,9 @@ def student(request):
     return render(request, "comprehensive.html", con)
 
 def generate_rolls(request):
+    context = {
+        'update':False
+    }
     if Comprehensive.objects.exists():
         context = {
             'update':True
