@@ -3,12 +3,14 @@ from django.db import models
 # Create your models here.
 class Branch(models.Model):
     branch=models.CharField(max_length=60, primary_key=True)
+    branch_name=models.CharField(max_length=60)
+    def __str__(self) -> str:
+        return self.branch
 class Schemes(models.Model):
     scheme=models.CharField(max_length=10,primary_key=True)
     st_year=models.IntegerField()
     end_year=models.IntegerField()
     branches=models.ManyToManyField(Branch)
-
     def __str__(self):
         return self.scheme
 class Subjects(models.Model):
