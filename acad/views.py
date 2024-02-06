@@ -98,24 +98,20 @@ def subject(request):
         total_marks=request.POST.get('total_marks')
         branch = request.POST.getlist('branch')
         
-        mem=Subjects(course_code = course_code, subject = subject, category = category, scheme = scheme,
+        mem=Subjects(course_code = course_code, subject = subject, category = category, 
                       semester = semester, mode = mode,credits = credits,type = type1, end_exam_marks = end_exam_marks,
                     cia_marks = cia_marks, total_marks = total_marks)
-        mem.save()    
-        print(branch)
+        mem.save()  
+        mem.scheme.add(scheme)
+        # print(branch)
 
-        for i in branch:
-            bran = Branch(branch = i, course_code = course_code)
-            bran.save()
+        
         return redirect('show')
-    # scheme_data = Schemes.objects.values('scheme')
-
-    # scheme_data = Schemes.objects.all()
-    # scheme_list = scheme_data.values_list('scheme', flat=True)
-    scheme_data = get_scheme_data()
-    context = {'scheme_data': scheme_data}
-    print(scheme_data)
-    return render(request, "subj.html", {'scheme_data':SafeString(scheme_data)})
+    
+    # scheme_data = get_scheme_data()
+    # context = {'scheme_data': scheme_data}
+    # print(scheme_data)
+    # return render(request, "subj.html", {'scheme_data':SafeString(scheme_data)})
 
 
 def marks(request):
