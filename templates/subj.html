@@ -14,18 +14,21 @@
                         <form method="POST" action=" {% url "subject" %} ">
                             {% csrf_token %}
                             <div class="row mb-3">
-
                                 <div class="col-md-4">
                                     <label for="scheme" class="form-label small">Scheme:</label>
-                                    <select id="scheme" class="form-select"  name="scheme" placeholder="Search" >
-                                        <option value="" disabled hidden selected>Select Scheme</option>
+                                    <select id="scheme" class="form-select"  name="scheme" placeholder="Search" multiple>
+                                        {% for scheme in schemes %}
+                                            <option value="{{scheme.scheme}}">{{scheme.scheme}}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="branch" class="form-label small">Branch:</label>
-                                    <select id="choices-multiple-remove-button"  name="branch" placeholder="Search" multiple>
-
+                                    <select id="branch"  name="branch" placeholder="Search" multiple>
+                                        {% for branch in branches %}
+                                            <option value="{{branch.branch}}">{{branch.branch}}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 
@@ -118,186 +121,18 @@
 
 {% comment %} {{ scheme_data|json_script:"schemeData"}} {% endcomment %}
 <script src="{% static "bbbootstrap.js" %}"></script>
-
-    <script>
-
-        function initializeBranchDropdown() {
-            return new Choices('#choices-multiple-remove-button', {
-                removeItemButton: true,
-                maxItemCount: 10,
-                searchResultLimit: 3,
-                renderChoiceLimit: 4,
-            });
-        }
-    
-        var scheme_data = {{ scheme_data|safe }};
-        var branchDropdown = initializeBranchDropdown(); // Initialize Choices instance
-    
-        $(document).ready(function () {
-            var schemeDropdown = $('#scheme');
-    
-            // Populate Scheme dropdown
-            scheme_data.forEach(function (scheme) {
-                schemeDropdown.append('<option value="' + scheme.scheme + '">' + scheme.scheme + '</option>');
-            });
-    
-            // Event handler for Scheme dropdown change
-            schemeDropdown.change(function () {
-                var selectedScheme = $(this).val();
-                console.log(selectedScheme);
-                var selectedSchemeData = scheme_data.find(function (sch) {
-                    return sch['scheme'] === selectedScheme;
-                });
-    
-                // Destroy existing Choices instance before reinitializing
-                branchDropdown.destroy();
-    
-                // Initialize a new Choices instance
-                branchDropdown = initializeBranchDropdown();
-    
-                // Populate Branch dropdown with branches of the selected scheme
-                if (selectedSchemeData) {
-                    var choices = selectedSchemeData.branches.map(function (branch) {
-                        return { value: branch, label: branch };
-                    });
-    
-                    // Set choices for the Branch dropdown
-                    branchDropdown.setChoices(choices, 'value', 'label', true);
-                    
-                    console.log(selectedSchemeData.branches);
-                }
-            });
-        });
-
-
-
-
-
-
-
-
-
-
-
-        /*function initializeBranchDropdown() {
-            return new Choices('#choices-multiple-remove-button', {
-                removeItemButton: true,
-                maxItemCount: 10,
-                searchResultLimit: 3,
-                renderChoiceLimit: 2,
-            });
-        }
-    
-        var scheme_data = {{ scheme_data|safe }};
-        var branchDropdown = initializeBranchDropdown(); // Initialize Choices instance
-    
-        $(document).ready(function () {
-            var schemeDropdown = $('#scheme');
-    
-            // Populate Scheme dropdown
-            scheme_data.forEach(function (scheme) {
-                schemeDropdown.append('<option value="' + scheme.scheme + '">' + scheme.scheme + '</option>');
-            });
-    
-            // Event handler for Scheme dropdown change
-            schemeDropdown.change(function () {
-                var selectedScheme = $(this).val();
-                console.log(selectedScheme);
-                var selectedSchemeData = scheme_data.find(function (sch) {
-                    return sch['scheme'] === selectedScheme;
-                });
-    
-                // Destroy existing Choices instance before reinitializing
-                branchDropdown.destroy();
-    
-                // Initialize a new Choices instance
-                branchDropdown = initializeBranchDropdown();
-    
-                // Populate Branch dropdown with branches of the selected scheme
-                if (selectedSchemeData) {
-                    selectedSchemeData.branches.forEach(function (branch) {
-                        branchDropdown.setChoices([{ value: branch, label: branch }], 'value', 'label', true);
-                    });
-                    console.log(selectedSchemeData.branches);
-                }
-            });
-        });*/
-
-
-
-
-        /*function bran(){
-    
-            var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-                removeItemButton: true,
-                maxItemCount:10,
-                searchResultLimit:3,
-                renderChoiceLimit:2
-            });
-        }
-        var scheme_data={{scheme_data|safe}}
-        console.log(scheme_data);
-        $(document).ready(function () {
-            var schemeDropdown = $('#scheme');
-            var branchDropdown = $('#choices-multiple-remove-button');
-            //bran();
-    
-            // Populate Scheme dropdown
-            scheme_data.forEach(function (scheme) {
-                schemeDropdown.append('<option value="' + scheme.scheme + '">' + scheme.scheme + '</option>');
-            });
-            console.log(scheme_data[0]['scheme'])
-            // Event handler for Scheme dropdown change
-            schemeDropdown.change(function () {
-                var selectedScheme = $(this).val();
-                console.log(selectedScheme);
-                var selectedSchemeData = scheme_data.find(function (sch) {
-                    return sch['scheme'] === selectedScheme;
-                });
-    
-                // Clear existing options in Branch dropdown
-                branchDropdown.empty();
-    
-                // Populate Branch dropdown with branches of the selected scheme
-                if (selectedSchemeData) {
-                    selectedSchemeData.branches.forEach(function (branch) {
-                        branchDropdown.append('<option value="' + branch + '">' + branch + '</option>');
-                    });
-                    console.log(selectedSchemeData.branches);
-                }
-
-                bran();
-            });
-        });*/
-
-
-
-
-
-
-
-
-        /*
-        $(document).ready(function () {
-                $('#scheme').change(function () {
-                    var selectedScheme = $(this).val();
-                    var branchesDropdown = $('#choices-multiple-remove-button');
-        
-                    // Clear existing options
-                    //branchesDropdown.empty();
-        
-                    // Populate branches dropdown based on the selected scheme
-                    {% for sch in scheme_data %}
-                        if ('{{ sch.scheme_name }}' === selectedScheme) {
-                            {% for branch in sch.branches %}
-                                branchesDropdown.append('<option value="' + '{{ branch }}' + '">' + '{{ branch }}' + '</option>');
-                            {% endfor %}
-                        }
-                    {% endfor %}
-                });
-            });
-    
-        */
-    </script>
-
+<script>
+    var schemeSelect = new Choices('#scheme', {
+        removeItemButton:true,
+        maxItemCount:10,
+        searchResultLimit:3,
+        renderChoiceLimit:4
+    })
+    var schemeSelect = new Choices('#branch', {
+        removeItemButton:true,
+        maxItemCount:10,
+        searchResultLimit:3,
+        renderChoiceLimit:4
+    })
+</script>
 {% endblock body %}

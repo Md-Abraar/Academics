@@ -49,13 +49,12 @@
                                     <div class="modal-body">
                                             <label for="scheme">Scheme:</label>
                                             <select name="scheme" id="scheme" class="form-select">
-                                                <option value="">All</option>
-                                                <option value="20" {% if scheme_filter == "20" %}selected{% endif %}>20</option>
-                                                <option value="17" {% if scheme_filter == "17" %}selected{% endif %}>17</option>
+                                                {% for scheme in schemes %}
+                                                    <option value="{{scheme.scheme}}" {% if scheme_filter == "{{scheme.scheme}}" %}selected{% endif %}>{{scheme.scheme}}</option>
+                                                {% endfor %}
                                             </select>
                                             <label for="semester">Semester:</label>
                                             <select name="semester" id="semester" class="form-select">
-                                                <option value="">All</option>
                                                 <option value="1" {% if sem_filter == "1" %}selected{% endif %}>I</option>
                                                 <option value="2" {% if sem_filter == "2" %}selected{% endif %}>II</option>
                                                 <option value="3" {% if sem_filter == "3" %}selected{% endif %}>III</option>
