@@ -52,43 +52,20 @@ def student_mapping(request):
             other_students = students.filter(Q(is_detained=True) | Q(is_gap=False))
         except Comprehensive.DoesNotExist:
             print('Not found') #replace with actual handling  
-    scheme_data = get_scheme_data()
-    context = {'scheme_data': SafeString(scheme_data)}
-    print(context) 
      
-    return render(request, "student_mapping.html", context )
+    return render(request, "student_mapping.html" )
 
 
 def faculty_mapping(request):
-    scheme_data = get_scheme_data()
-    context = {'scheme_data': SafeString(scheme_data)}
-    print(context) 
 
-    return render(request, "faculty_mapping.html", context)
-
-def get_scheme_data():
-    schemes = Schemes.objects.all()
-    
-    data_list = []
-    for scheme in schemes:
-        
-        branch_list = scheme.branches.split()
-
-        scheme_data = {
-            'scheme': scheme.scheme,
-            'branches': branch_list,
-        }
-
-        data_list.append(scheme_data)
-
-    return data_list
+    return render(request, "faculty_mapping.html")
 
 def subject(request):
     if request.method=='POST':
         course_code=request.POST.get('course_code')
         subject=request.POST.get('subject')
         category=request.POST.get('category')
-        scheme=request.POST.get('scheme')
+        scheme=request.POST.getlist('scheme')
         semester=request.POST.get('semester')
         mode=request.POST.get('mode')
         credits=request.POST.get('credits')
@@ -98,24 +75,20 @@ def subject(request):
         total_marks=request.POST.get('total_marks')
         branch = request.POST.getlist('branch')
         
-        mem=Subjects(course_code = course_code, subject = subject, category = category, scheme = scheme,
-                      semester = semester, mode = mode,credits = credits,type = type1, end_exam_marks = end_exam_marks,
-                    cia_marks = cia_marks, total_marks = total_marks)
-        mem.save()    
-        print(branch)
+        mem=Subjects(course_code = course_code, subject = subject, category = category, semester = semester, mode = mode,credits = credits,type = type1, end_exam_marks = end_exam_marks, cia_marks = cia_marks, total_marks = total_marks)
+        mem.save()  
+        mem.scheme.set(scheme)
+        mem.branch.set(branch)
 
-        for i in branch:
-            bran = Branch(branch = i, course_code = course_code)
-            bran.save()
-        return redirect('show')
-    # scheme_data = Schemes.objects.values('scheme')
+    schemes = Schemes.objects.values('scheme')
+    branches = Branch.objects.values('branch')
 
-    # scheme_data = Schemes.objects.all()
-    # scheme_list = scheme_data.values_list('scheme', flat=True)
-    scheme_data = get_scheme_data()
-    context = {'scheme_data': scheme_data}
-    print(scheme_data)
-    return render(request, "subj.html", {'scheme_data':SafeString(scheme_data)})
+    context = {
+        'schemes':schemes,
+        'branches':branches
+    }
+
+    return render(request, "subj.html",context)
 
 
 def marks(request):
@@ -127,8 +100,9 @@ def show(request):
     sem_filter = request.GET.get('semester', '')
     type_filter = request.GET.get('type', '')  
     search_query = request.GET.get('search', '')
+
     # Retrieve subject records
-    all_records = Subjects.objects.all().order_by('-id')
+    all_records = Subjects.objects.all()
     if scheme_filter:
         all_records = all_records.filter(scheme=scheme_filter)
     if sem_filter:
@@ -136,7 +110,7 @@ def show(request):
     if type_filter:
         all_records = all_records.filter(type=type_filter)
 
-    subjects_records = all_records.filter(subject__contains=search_query).order_by('-id')
+    subjects_records = all_records.filter(subject__contains=search_query)
     
     # Iterate through subject records and fetch associated branches
     subjects_with_branches = []
@@ -156,12 +130,14 @@ def show(request):
     except EmptyPage:
         records = paginator.page(paginator.num_pages)
     
+    schemes = Schemes.objects.values('scheme')
     context = {
         'records':records,
         'search_query':search_query,
         'scheme_filter':scheme_filter,
         'sem_filter':sem_filter,
-        'type_filter':type_filter
+        'type_filter':type_filter,
+        'schemes':schemes
     }
     return render(request, 'show.html', context)
 
